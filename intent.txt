@@ -1,0 +1,24 @@
+{
+  "intents": [
+    {
+      "intent": "Whatjonsays"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    }
+  ]
+}
+
+Whatjonsays tell me a jon saying
+Whatjonsays would Jon say
+Whatjonsays what would Jon do
+Whatjonsays what would jon say
+Whatjonsays Jon what would Jon say
+Whatjonsays jon says
+Whatjonsays what jon says
