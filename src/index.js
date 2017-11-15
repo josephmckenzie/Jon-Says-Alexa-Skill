@@ -1,6 +1,37 @@
 'use strict';
 var Alexa = require('alexa-sdk');
-var APP_ID = undefined;  // TODO replace with your app ID (OPTIONAL).
+var APP_ID = 'amzn1.ask.skill.f578b6d9-bea2-4454-8a0c-89bd3b358ca4';  // TODO replace with your app ID (OPTIONAL).
+
+
+
+
+  var https = require('https');
+  var results = '';
+  var jonsaysarray = [] || jonsaysarray;
+  var options = {
+        host: 'bsi7688wf2.execute-api.us-east-1.amazonaws.com',
+        path: '/dev/todos',
+		    port: 443
+	};
+
+var callback = function(response) {
+
+  response.on('data', function (chunk) {
+    results += chunk;
+  });
+  response.on('end', function () {
+//    console.log(str,"str");
+var str = JSON.parse(results);
+var phrases = str.Items;
+
+phrases.forEach(function(item) {
+    jonsaysarray.push(item.name);
+});
+	console.log(jonsaysarray,"jon phrases")
+	});
+};
+var req = https.request(options, callback).end();
+
 
 var languageStrings = {
     "en": {
@@ -17,53 +48,13 @@ var languageStrings = {
     },
     "en-US": {
         "translation": {
-            "FACTS": [
-              "Google it.",
-							"I like man buns",
-							"You're Fired",
-							"Ye ol' chestnuts",
-							"I'm Bringing the British prespective to America",
-							"biscuits",
-							"Hey Joe. Before I forget, there is a big box of meaty stuff in the office fridge for the pups.",
-							"That's Rubbish",
-							"I'm just Brutish",
-							"Where are the tests?",
-							"TEST,TEST,TEST",
-							"Learn to indent",
-							"It's You're not youre!",
-							"I'm Sorry Amanda you're right",
-							"You're right Amanda",
-							"I'm British not a brute",
-							"That's Bollocks",
-							"I go to go see A Man About a Dog"
-            ],
+            "FACTS": jonsaysarray,
             "SKILL_NAME" : "American Jon sayings"
         }
     },
     "en-GB": {
         "translation": {
-            "FACTS": [
-           
-              "Google it.",
-							"I like man buns",
-							"You're Fired",
-							"Ye ol' chestnuts",
-							"I'm Bringing the British prespective to America",
-							"biscuits",
-							"Hey Joe. Before I forget, there is a big box of meaty stuff in the office fridge for the pups.",
-							"That's Rubbish",
-							"I',m just Brutish",
-							"Where are the tests?",
-							"TEST,TEST,TEST",
-							"Learn to indent",
-							"It's You're not youre!",
-							"I'm sorry amanda you're right",
-							"You're right Amanda",
-							"I'm Beitish not a brute",
-							"That's Bollocks",
-							"I got to go See A Man About a Dog"
-								
-            ],
+            "FACTS": jonsaysarray,
             "SKILL_NAME" : "British Jon sayings"
         }
     },
