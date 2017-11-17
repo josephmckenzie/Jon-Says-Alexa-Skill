@@ -43,21 +43,29 @@ var languageStrings = {
             ],
             "SKILL_NAME" : "Jon's Facts of Life",
             "GET_FACT_MESSAGE" : "",
-            "HELP_MESSAGE" : "You can say What would Jon say, or, you can say exit... What can I help you with?",
-            "HELP_REPROMPT" : "What can I help you with?",
-            "STOP_MESSAGE" : "Goodbye!"
+            "HELP_MESSAGE" : "You can say What would Jon say, or not. It doesn't matter to Alexa",
+            "HELP_REPROMPT" : "I must be speaking in manbun, sorry about that",
+            "STOP_MESSAGE" : "Stop, do you mean stop poking fun at Jon? NEVER!"
         }
     },
     "en-US": {
         "translation": {
             "FACTS": jonsaysarray,
-            "SKILL_NAME" : "American Jon sayings"
+            "SKILL_NAME" : "American Jon sayings",
+									   "GET_FACT_MESSAGE" : "",
+            "HELP_MESSAGE" : "You can say What would Jon say, or not. It doesn't matter to Alexa",
+            "HELP_REPROMPT" : "I must be speaking in manbun, sorry about that",
+            "STOP_MESSAGE" : "Stop, do you mean stop poking fun at Jon? NEVER!"
         }
     },
     "en-GB": {
         "translation": {
             "FACTS": jonsaysarray,
-            "SKILL_NAME" : "British Jon sayings"
+            "SKILL_NAME" : "British Jon sayings",
+									   "GET_FACT_MESSAGE" : "",
+            "HELP_MESSAGE" : "You can say What would Jon say, or not. It doesn't matter to Alexa",
+            "HELP_REPROMPT" : "I must be speaking in manbun, sorry about that",
+            "STOP_MESSAGE" : "Stop, do you mean stop poking fun at Jon? NEVER!"
         }
     },
  };
@@ -99,5 +107,8 @@ var handlers = {
     },
     'AMAZON.StopIntent': function () {
         this.emit(':tell', this.t("STOP_MESSAGE"));
+    },
+	    'Unhandled': function () {
+        this.emit(':ask', 'What did you mean?', "Damn are you that drunk or just british?");
     }
 };

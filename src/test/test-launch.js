@@ -3,26 +3,24 @@
 /* eslint-env es6 */
 require('commander');
 var shoulditest = true
-
+var expect = require('chai').expect;  
+var lambdaToTest = require('../index');
+var assert = require('chai').assert;
+var context = require('aws-lambda-mock-context');
+var ctx = context();
 
 //Starts off making sure we can hang with Alexa, as she is a bad ass
-describe("Tests for Jon Says", function() {  
- var expect = require('chai').expect,  
-    lambdaToTest = require('../index'),
-    assert = require('chai').assert,
-    context = require('aws-lambda-mock-context'),
-    ctx = context(),
-    intentType,
-    intentName ,
-    isIntentNew,    
-    speechResponse ,
-         speechError = speechError || null;
+describe("Tests for Jon Says, Launch Intent", function() {  
+
+var speechResponse = null ;
+var speechError =  null;
     // Fires once for the group of tests, done is mocha's callback to 
     // let it know that an   async operation has completed before running the rest 
     // of the tests, 2000ms is the default timeout though
   
         //This fires the event to make ambda call as if alexa had iniated it
-        lambdaToTest.handler(
+	before(function(done){
+	        lambdaToTest.handler(
 										{
 												"session": {
 														"new": true,
@@ -67,9 +65,9 @@ describe("Tests for Jon Says", function() {
 								);
     //Captures the response and/or errors
 		ctx.Promise
-				.then(resp => { speechResponse = resp;})
-				.catch(err => { speechError = err;});
- 
+				.then(resp => { speechResponse = resp; done(); })
+				.catch(err => { speechError = err; done(); });
+ })
 // The initial launch of our Alexa app
     describe('Should launch skill giving a random Jon Says phrase', function() {
         //console.log(intentName,intentType,isIntentNew);
@@ -93,6 +91,9 @@ describe("Tests for Jon Says", function() {
         });
         it('should have a speechlet response ready to speak', function() {
             expect(speechResponse.response).not.to.be.a('null');
+        });
+					   it('should have a spoken response', function() {
+            expect(speechResponse.response.outputSpeech).not.to.be.a('null');
         });
         it('should close the Alexa session', function() {
             expect(speechResponse.response.shouldEndSession).not.to.be.null,
