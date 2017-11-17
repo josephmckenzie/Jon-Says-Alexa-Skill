@@ -1,0 +1,37 @@
+{
+  "name": "lets-get-drunk",
+  "version": "1.0.0",
+  "description": "An Alexa party skill app designed to tell who should drink what at a party or wherever ... I don't judge  ",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test_alexa.js ; exit 0"
+  },
+  "keywords": [
+    "alexa"
+  ],
+  "author": "Joseph Mckenzie",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "alexa-sdk": "^1.0.9",
+    "aws-lambda-mock-context": "^3.1.1",
+    "commander": "^2.11.0",
+    "describe": "^1.2.0"
+  },
+  "devDependencies": {
+    "alexa-conversation": "^0.1.0",
+    "chai": "^4.1.0",
+    "mocha": "^3.5.3",
+    "standard": "^3.13.2"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josephmckenzie/LetsGetDrunk-AlexaSkill.git"
+  },
+  "bugs": {
+    "url": "https://github.com/josephmckenzie/LetsGetDrunk-AlexaSkill/issues"
+  },
+  "homepage": "https://github.com/josephmckenzie/LetsGetDrunk-AlexaSkill#readme"
+}

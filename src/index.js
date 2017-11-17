@@ -25,7 +25,9 @@ var str = JSON.parse(results);
 var phrases = str.Items;
 
 phrases.forEach(function(item) {
-    jonsaysarray.push(item.name);
+if (item.skill == 'Jon Says') {
+    jonsaysarray.push(item.jonsays);
+}
 });
 	console.log(jonsaysarray,"jon phrases")
 	});
@@ -62,8 +64,8 @@ var languageStrings = {
 
 exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);
-    alexa.APP_ID = APP_ID;
-    // To enable string internationalization (i18n) features, set a resources object.
+    alexa.appId=APP_ID;
+	// To enable string internationalization (i18n) features, set a resources object.
     alexa.resources = languageStrings;
     alexa.registerHandlers(handlers);
     alexa.execute();
