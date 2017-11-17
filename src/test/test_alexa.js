@@ -2,8 +2,11 @@
 /* jshint esnext: true */
 /* eslint-env es6 */
 require('commander');
+var shoulditest = true
+
+
 //Starts off making sure we can hang with Alexa, as she is a bad ass
-describe("Tests for Whose Shot, is it anyway?", function() {  
+describe("Tests for Jon Says", function() {  
  var expect = require('chai').expect,  
     lambdaToTest = require('../index'),
     assert = require('chai').assert,
@@ -71,7 +74,10 @@ describe("Tests for Whose Shot, is it anyway?", function() {
     describe('Should launch skill giving a random Jon Says phrase', function() {
         //console.log(intentName,intentType,isIntentNew);
 								it('Jon says (In Real Life) it SHOULD BE TESTED', function() {
-									   assert.equal(true,true);
+												if (shoulditest == true){
+													console.log("Jon Says Test Test Test");
+												};
+											 expect(shoulditest).to.be.true;
 								});
         it('should not have errored',function() {
             expect(speechError).to.be.a('null');
