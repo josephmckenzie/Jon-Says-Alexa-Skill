@@ -84,8 +84,8 @@ var handlers = {
         var randomFact = phrasesArray[index];
 console.log(phrasesArray)
         // Create speech output
-        var speechOutput = this.t("JON_SAYS") + randomFact;
-        this.emit(':tellWithCard', speechOutput, this.t("SKILL_NAME"), randomFact)
+        var speechOutput = this.t("JON_SAYS") + randomFact + "   " + "Would you like to hear another?";
+        this.emit(':ask', speechOutput)
     },
     'AMAZON.HelpIntent': function () {
         var speechOutput = this.t("HELP_MESSAGE");

@@ -102,7 +102,7 @@ var speechError =  null;
 								});
         it('should not close the Alexa session. (Whole Intent)', function() {
             expect(speechResponse.response.shouldEndSession).not.to.be.null,
-            expect(speechResponse.response.shouldEndSession).to.be.true;
+            expect(speechResponse.response.shouldEndSession).to.be.false;
         }); 
 					   
           //We have now successfully launched our skill, with everything coming back correctly in all formats
