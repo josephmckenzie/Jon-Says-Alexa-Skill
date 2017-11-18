@@ -10,7 +10,7 @@ var context = require('aws-lambda-mock-context');
 var ctx = context();
 
 //Starts off making sure we can hang with Alexa, as she is a bad ass
-describe("Tests for Jon Says, Stop Intent", function() {  
+describe("Tests for Jon Says, Help Intent", function() {  
 
 var speechResponse = null ;
 var speechError =  null;
@@ -39,7 +39,7 @@ var speechError =  null;
 														"type": "IntentRequest",
 														"requestId": "EdwRequestId.1754fa3f-86a2-4a13-9dca-071d922f38a9",
 														"intent": {
-																"name": "AMAZON.StopIntent",
+																"name": "AMAZON.HelpIntent",
 																"slots": {}
 														},
 														"locale": "en-US",
@@ -71,36 +71,50 @@ var speechError =  null;
 				.catch(err => { speechError = err; done(); });
  })
 // The initial launch of our Alexa app
-    describe('Should have already launched skill, now it should give our stop prompt', function() {
-
-					   it('Jon still says it SHOULD BE TESTED', function() {
-								 if (shoulditest == true){console.log("Jon Says Test Test Test");};
+    describe('Should give a prompt with our HELP message', function() {
+        //console.log(intentName,intentType,isIntentNew);
+								it('Jon still says it SHOULD BE TESTED', function() {
+												if (shoulditest == true){
+													console.log("Jon Says Test Test Test");
+												};
 											 expect(shoulditest).to.be.true;
 								});
-        it('should not have errored',function() {
+        it('should not have errored (Whole Intent)',function() {
             expect(speechError).to.be.a('null');
         });
-        it('should have a version', function() {
+        it('should have a version (Whole Intent)', function() {
             expect(speechResponse.version).not.to.be.a('null');
         });
-        it('should have session attributes', function() {
+        it('should have session attributes (Whole Intent)', function() {
             expect(speechResponse.response.sessionAttributes).not.to.be.a('null');
         });
-        it('should tell us that in came back a SSML message type.', function() {
+        it('should tell us that in came back a SSML message type. (First Help Message)', function() {
             assert.equal(speechResponse.response.outputSpeech.type, 'SSML');
         });
-        it('should have a speechlet response ready to speak', function() {
+        it('should have a speechlet response ready to speak. (First Help Message)', function() {
             expect(speechResponse.response).not.to.be.a('null');
         });
-					   it('should have a spoken response', function() {
+					   it('should have a spoken response. (First Help Message)', function() {
             expect(speechResponse.response.outputSpeech).not.to.be.a('null');
         });
-					   it('should give the correct STOP message', function() {
-												assert.equal(speechResponse.response.outputSpeech.ssml, '<speak> Stop, do you mean stop poking fun at Jon? NEVER! </speak>'); 
+					   it('should give the correct first HELP message. (First Help Message)', function() {
+												assert.equal(speechResponse.response.outputSpeech.ssml, '<speak> You can say What would Jon say, or not. It doesn\'t matter to Alexa </speak>'); 
 								});
-        it('should close the Alexa session', function() {
+					   it('should tell us that the REPROMPT came back a SSML message type. (REPROMPT Help Message)', function() {
+            assert.equal(speechResponse.response.outputSpeech.type, 'SSML');
+        });
+        it('should have a speechlet REPROMPT response ready to speak. (REPROMPT Help Message)', function() {
+            expect(speechResponse.response).not.to.be.a('null');
+        });
+					   it('should have a spoken REPROMPT response. (REPROMPT Help Message)', function() {
+            expect(speechResponse.response.outputSpeech).not.to.be.a('null');
+								});
+			   		it('should give the correct HELP REPROMPT message. (REPROMPT Help Message)', function() {
+												assert.equal(speechResponse.response.reprompt.outputSpeech.ssml, '<speak> I must be speaking in manbun, sorry about that </speak>'); 
+								});
+        it('should not close the Alexa session. (Whole Intent)', function() {
             expect(speechResponse.response.shouldEndSession).not.to.be.null,
-            expect(speechResponse.response.shouldEndSession).to.be.true;
+            expect(speechResponse.response.shouldEndSession).to.be.false;
         }); 
 					   
           //We have now successfully launched our skill, with everything coming back correctly in all formats

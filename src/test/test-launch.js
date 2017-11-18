@@ -95,9 +95,12 @@ var speechError =  null;
 					   it('should have a spoken response', function() {
             expect(speechResponse.response.outputSpeech).not.to.be.a('null');
         });
-        it('should close the Alexa session', function() {
+					   it('should give the correct Launch message. (Launch Message)', function() {
+												assert.equal(speechResponse.response.outputSpeech.ssml, '<speak> Would you like to hear a Jon says phrase today? </speak>'); 
+								});
+        it('should not close the Alexa session', function() {
             expect(speechResponse.response.shouldEndSession).not.to.be.null,
-            expect(speechResponse.response.shouldEndSession).to.be.true;
+            expect(speechResponse.response.shouldEndSession).to.be.false;
         }); 
           //We have now successfully launched our skill, with everything coming back correctly in all formats
     });
