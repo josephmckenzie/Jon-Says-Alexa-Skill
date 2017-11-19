@@ -4,7 +4,7 @@
   "description": "An Alexa party skill app designed to tell who should drink what at a party or wherever ... I don't judge  ",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test-launch.js;mocha test-yesIntent.js;mocha test-help.js;mocha test-stop.js; exit 0"
+    "test": "mocha test-launch.js;mocha test-yesIntent.js;mocha test-help.js;mocha test-stop.js;mocha test-noIntent.js; exit 0"
   },
   "keywords": [
     "alexa"

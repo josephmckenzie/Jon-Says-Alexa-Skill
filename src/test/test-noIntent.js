@@ -10,7 +10,7 @@ var context = require('aws-lambda-mock-context');
 var ctx = context();
 
 //Starts off making sure we can hang with Alexa, as she is a bad ass
-describe("Tests for Jon Says, Help Intent", function() {  
+describe("Tests for Jon Says, NOINTENTmessage", function() {  
 
 var speechResponse = null ;
 var speechError =  null;
@@ -39,7 +39,7 @@ var speechError =  null;
 														"type": "IntentRequest",
 														"requestId": "EdwRequestId.1754fa3f-86a2-4a13-9dca-071d922f38a9",
 														"intent": {
-																"name": "AMAZON.HelpIntent",
+																"name": "AMAZON.NoIntent",
 																"slots": {}
 														},
 														"locale": "en-US",
@@ -71,7 +71,7 @@ var speechError =  null;
 				.catch(err => { speechError = err; done(); });
  })
 // The initial launch of our Alexa app
-    describe('Should give a prompt with our HELP message', function() {
+    describe('Should tell us our NOINTENTmessage', function() {
         //console.log(intentName,intentType,isIntentNew);
 								it('Jon still says it SHOULD BE TESTED', function() {
 												if (shoulditest == true){
@@ -88,33 +88,24 @@ var speechError =  null;
         it('should have session attributes (Whole Intent)', function() {
             expect(speechResponse.response.sessionAttributes).not.to.be.a('null');
         });
-        it('should tell us that in came back a SSML message type. (First Help Message)', function() {
+        it('should tell us that in came back a SSML message type. (NOINTENTmessage)', function() {
             assert.equal(speechResponse.response.outputSpeech.type, 'SSML');
         });
-        it('should have a speechlet response ready to speak. (First Help Message)', function() {
+        it('should have a speechlet response ready to speak. (NOINTENTmessage)', function() {
             expect(speechResponse.response).not.to.be.a('null');
         });
-					   it('should have a spoken response. (First Help Message)', function() {
+					   it('should have a spoken response. (NOINTENTmessage)', function() {
             expect(speechResponse.response.outputSpeech).not.to.be.a('null');
         });
-					   it('should give the correct first HELP message. (First Help Message)', function() {
-												assert.equal(speechResponse.response.outputSpeech.ssml, '<speak> You can say What would Jon say, or not. It doesn\'t matter to Alexa </speak>'); 
+					   it('should give a jon says phrase that is not null. (NOINTENTmessage)', function() {
+            expect(speechResponse.response.outputSpeech.ssml).not.to.be.a('null');
 								});
-					   it('should tell us that the REPROMPT came back a SSML message type. (REPROMPT Help Message)', function() {
-            assert.equal(speechResponse.response.outputSpeech.type, 'SSML');
-        });
-        it('should have a speechlet REPROMPT response ready to speak. (REPROMPT Help Message)', function() {
-            expect(speechResponse.response).not.to.be.a('null');
-        });
-					   it('should have a spoken REPROMPT response. (REPROMPT Help Message)', function() {
-            expect(speechResponse.response.outputSpeech).not.to.be.a('null');
-								});
-			   		it('should give the correct HELP REPROMPT message. (REPROMPT Help Message)', function() {
-												assert.equal(speechResponse.response.reprompt.outputSpeech.ssml, '<speak> <emphasis level="strong">This is a simple skill , Do you really need help? If so consult a shrink</emphasis> </speak>'); 
-								});
+					   it('should give the no / a goodbye message', function() {
+											assert.equal(speechResponse.response.outputSpeech.ssml, '<speak> Well you\'re no fun, but ALexa still loves you. Be sure to check back regularly for new Jon Says phrases </speak>');
+								}),
         it('should not close the Alexa session. (Whole Intent)', function() {
             expect(speechResponse.response.shouldEndSession).not.to.be.null,
-            expect(speechResponse.response.shouldEndSession).to.be.false;
+            expect(speechResponse.response.shouldEndSession).to.be.true;
         }); 
 					   
           //We have now successfully launched our skill, with everything coming back correctly in all formats

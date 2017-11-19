@@ -30,7 +30,7 @@ phrases.forEach(function(item) {
 })
 
 
-	console.log(jonsaysarray,"Persons Dddddrinking")
+	console.log(jonsaysarray,'Persons Dddddrinking')
 	});
 };
 var req = https.request(options, callback).end();
@@ -38,32 +38,30 @@ var languageStrings = {
     "en": {
         "translation": {
             "phrases": jonsaysarray,
-            "SKILL_NAME" : "Jon's Facts of Life & More",
-            "JON_SAYS" : "",
-            "HELP_MESSAGE" : "You can say What would Jon say, or not. It doesn't matter to Alexa",
-            "HELP_REPROMPT" : "I must be speaking in manbun, sorry about that",
-            "STOP_MESSAGE" : "Stop, do you mean stop poking fun at Jon? NEVER!",
-									   "Yes": "Yes"
+            "SKILL_NAME" : 'Jon\'s Facts of Life & More',
+            "JON_SAYS" : '<break time="5s"/>',
+            "HELP_MESSAGE" : 'You can say What would Jon say, or not. It doesn\'t matter to Alexa',
+            "HELP_REPROMPT" : '<emphasis level="strong">This is a simple skill , Do you really need help? If so consult a shrink</emphasis>',
+            "STOP_MESSAGE" : "Stop, do you mean stop poking fun at Jon? NEVER!"
         }
     },
     "en-US": {
         "translation": {
             "phrases": jonsaysarray,
             "SKILL_NAME" : "Jon's Facts of Life & More ",
-									   "JON_SAYS" : "",
+									   "JON_SAYS" : '<break time="5s"/>',
             "HELP_MESSAGE" : "You can say What would Jon say, or not. It doesn't matter to Alexa",
-            "HELP_REPROMPT" : "I must be speaking in manbun, sorry about that",
-            "STOP_MESSAGE" : "Stop, do you mean stop poking fun at Jon? NEVER!",
-									   "Yes": "Yes"
+            "HELP_REPROMPT" : '<emphasis level="strong">This is a simple skill , Do you really need help? If so consult a shrink</emphasis>',
+            "STOP_MESSAGE" : "Stop, do you mean stop poking fun at Jon? NEVER!"
         }
     },
     "en-GB": {
         "translation": {
             "phrases": jonsaysarray,
             "SKILL_NAME" : "Jon's Facts of Life & More",
-									   "JON_SAYS" : "",
+									   "JON_SAYS" : '<break time="1s"/>',
             "HELP_MESSAGE" : "Top of the morning to you, got any kippers?",
-            "HELP_REPROMPT" : "I'm so sorry dear, speak up",
+            "HELP_REPROMPT" : '<emphasis level="strong">This is a simple skill , Do you really need help? If so consult a shrink</emphasis>',
             "STOP_MESSAGE" : "Stop, do you mean stop poking fun at Jon? NEVER!"
         }
     },
@@ -84,12 +82,14 @@ var handlers = {
         var randomFact = phrasesArray[index];
 console.log(phrasesArray)
         // Create speech output
-        var speechOutput = this.t("JON_SAYS") + randomFact + "   " + "Would you like to hear another?";
+        var speechOutput = randomFact + this.t("JON_SAYS") + "Would you like to hear another?";
         this.emit(':ask', speechOutput)
     },
     'AMAZON.HelpIntent': function () {
         var speechOutput = this.t("HELP_MESSAGE");
         var reprompt = this.t("HELP_REPROMPT");
+					
+					
         this.emit(':ask', speechOutput, reprompt);
     },
     'AMAZON.CancelIntent': function () {
@@ -104,7 +104,9 @@ console.log(phrasesArray)
     'AMAZON.YesIntent': function () {
                 this.emit('GetFact');
 
-    }
+    },'AMAZON.NoIntent': function() {
+					  this.emit(':tell', 'Well you\'re no fun, but ALexa still loves you. Be sure to check back regularly for new Jon Says phrases')
+				}
 };
 
 
