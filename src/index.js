@@ -1,6 +1,7 @@
 'use strict';
 var Alexa = require('alexa-sdk');
 var APP_ID = 'amzn1.ask.skill.f578b6d9-bea2-4454-8a0c-89bd3b358ca4';  // TODO replace with your app ID (OPTIONAL).
+var RepeatNameIntent = require('./repeat-name-intent.js');
 
 
    var https = require('https');
