@@ -25,7 +25,7 @@ phrases.forEach(function(item) {
 })
 
 
-	console.log(jonsaysarray,"Persons Dddddrinking")
+	console.log(jonsaysarray,"Jon says Array")
 	});
 };
 var req = https.request(options, callback).end();
